@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+    <!-- <script type="text/javascript" src="/for_QR_Code.js"></script>  --> <!-- for offline -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>QR Code Scaner</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <video id="video" width="100%"></video>
+            </div>
+            <div class="col-md-6">
+                <p class="text-center bg-danger">QR Code reader</p>
+                <h1 class="text-center bg-info" id="result">Natija shu yerda chiqadi</h1>
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+           let scanner = new Instascan.Scanner({ video: document.getElementById('video')});
+           Instascan.Camera.getCameras().then(function(cameras){
+               if(cameras.length > 0 ){
+                   scanner.start(cameras[0]);
+               } else{
+                   alert('No cameras found');
+               }
+
+           }).catch(function(error) {
+               console.error(error);
+           });
+        scanner.addListener('scan',function(c){
+               document.getElementById('result').innerHTML=c;
+           });
+
+        
+        </script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
